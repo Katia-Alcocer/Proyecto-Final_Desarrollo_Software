@@ -1,0 +1,92 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e3f2fd; /* Azul clarito */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Form Container */
+#employee-form {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+    gap: 15px; /* Espaciado entre los elementos */
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    color: #1565c0; /* Azul más intenso */
+    margin-bottom: 20px;
+}
+
+/* Labels and Inputs (50% width for two columns) */
+label {
+    font-weight: bold;
+    color: #0d47a1; /* Azul oscuro */
+    width: 100%;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #90caf9; /* Azul claro */
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box; /* Asegura que padding no expanda el ancho */
+}
+
+.form-group {
+    width: calc(50% - 15px); /* Ocupa la mitad del formulario con espacio entre columnas */
+}
+
+/* Full-width fields */
+.form-group.full-width {
+    width: 100%;
+}
+
+/* Buttons */
+button {
+    background-color: #42a5f5; /* Azul primario */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #1e88e5; /* Azul más oscuro */
+}
+
+/* Exit Button */
+.exit-button {
+    background-color: #f44336; /* Rojo */
+}
+
+.exit-button:hover {
+    background-color: #d32f2f; /* Rojo más oscuro */
+}
+
+/* Align buttons side by side */
+button[type="submit"] {
+    width: calc(50% - 15px); /* Ocupa la mitad del formulario */
+}
+
+button.exit-button {
+    width: calc(50% - 15px); /* Ocupa la otra mitad */
+}
