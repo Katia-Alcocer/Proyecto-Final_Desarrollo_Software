@@ -58,13 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':idProveedor', $idProveedor);
     $stmt->bindParam(':idMedicamento', $idMedicamento);
 
-   /* if ($stmt->execute()) {
-        echo "<p>Medicamento actualizado con éxito.</p>";
-        echo "<a href='ListaMedicamento.php'>Volver a la lista de medicamentos</a>";
+    if ($stmt->execute()) {
+        // Redirigir a la lista de medicamentos después de la actualización
+        header("Location: ListaMedicamento.php");
         exit;
     } else {
         echo "<p>Error al actualizar el medicamento.</p>";
-    }*/
+    }
+    
 }
 ?>
 <!DOCTYPE html>
