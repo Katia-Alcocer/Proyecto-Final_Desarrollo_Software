@@ -73,11 +73,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Empleado</title>
-    <link rel="stylesheet" type="text/css" href="Editar.css">
+    <link rel="stylesheet" type="text/css" href="styleEditar.css">
 </head>
 <body>
+   
     <h1>Editar Empleado</h1>
+     <div class="mover">
     <form method="POST">
+    <div class="form-container">
+    <div>
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($empleado['Nombre']); ?>" required>
 
@@ -89,7 +93,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="telefono">Teléfono:</label>
         <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($empleado['Telefono']); ?>" required>
-
+        <button class="act" type="submit">Actualizar</button>
+    </div>
+    <div>
         <label for="curp">CURP:</label>
         <input type="text" id="curp" name="curp" value="<?php echo htmlspecialchars($empleado['CURP']); ?>" required>
 
@@ -120,9 +126,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
         </select>
 
-        <button type="submit">Actualizar</button>
+        <button class="exit-button" onclick="window.location.href='Listaempleados.php';">Cancelar</button>
+    </div></div>
+
     </form>
-    <a href="Listaempleados.php">Cancelar</a>
+    </div>
 </body>
 </html>
 

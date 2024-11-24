@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Sucursal</title>
-    <link rel="stylesheet" type="text/css" href="Editar.css">
+    <link rel="stylesheet" type="text/css" href="styleEditar.css">
 </head>
 <body>
     <h1>Editar  Sucursal</h1>
@@ -90,9 +90,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <label for="clave">Clave:</label>
         <input type="text" name="clave" value="<?php echo htmlspecialchars($sucursal['Clave']); ?>" required>
-
-        <button type="submit">Guardar Cambios</button>
-        <button type="button" onclick="window.location.href='AgregarSucursal.php'">Salir sin Guardar</button>
+        <div class="form-container">
+        <div>
+        <button  class="act" type="submit">Guardar Cambios</button>
+        </div>
+        <div>
+        <button class="exit-button" type="button" onclick="window.location.href='AgregarSucursal.php'">Salir sin Guardar</button>
+        </div></div>
     </form>
 </body>
 </html>

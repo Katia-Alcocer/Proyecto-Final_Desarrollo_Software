@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Sucursal</title>
-    <link rel="stylesheet" type="text/css" href="Editar.css">
+    <link rel="stylesheet" type="text/css" href="styleEditar.css">
 </head>
 <body>
     <h1>Editar  Proveedor</h1>
@@ -81,9 +81,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <label for="direccion">Dirección:</label>
         <input type="text" name="direccion" value="<?php echo htmlspecialchars($provedor['Direccion']); ?>" required>
-
-        <button type="submit">Guardar Cambios</button>
-        <button type="button" onclick="window.location.href='AgregarProvedor.php'">Salir sin Guardar</button>
+        <div class="form-container">
+        <div>
+        <button class="act" type="submit">Guardar Cambios</button>
+        </div>
+        <div>
+        <button class="exit-button" type="button" onclick="window.location.href='ListaProvedores.php'">Salir sin Guardar</button>
+        </div></div>
     </form>
 </body>
 </html>
