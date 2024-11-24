@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #6fb2ac; /* Color de fondo café */
+    color: white; /* Color del texto */
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input, button {
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #4CAF50; /* Color verde */
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #45a049; /* Color verde más oscuro al pasar el mouse */
+}
+
+/* Estilo de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background-color: #6F4A4A; /* Color de fondo del encabezado */
+    color: white; /* Color del texto en el encabezado */
+}
+
+/* Estilo del botón de salir */
+.exit-button {
+    background-color: #C0392B; /* Color rojo para el botón de salir */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    padding: 10px 20px; /* Espaciado interno */
+    margin-top: 20px; /* Margen superior */
+}
+
+.exit-button:hover {
+    background-color: #A93226; /* Color más oscuro al pasar el mouse */
+}

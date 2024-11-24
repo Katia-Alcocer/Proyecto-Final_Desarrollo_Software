@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  apache:
+    container_name: php-apache
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - '82:80'
+  db:
+    container_name: db
+    image: mysql:8.0  # Cambia a una versión estable si es necesario
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: clave
+      MYSQL_DATABASE: FARMACIA 
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user_password
+    ports:
+      - '3306:3306'
+    volumes:
+      - C:/Users/itzel/Documents/mysql_90:/var/lib/mysql
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    ports:
+      - '83:80'
+    restart: always
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
