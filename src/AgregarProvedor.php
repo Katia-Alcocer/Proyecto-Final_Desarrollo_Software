@@ -25,7 +25,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <input type="text" id="direccion" name="Direccion">
 
         <button type="submit">Agregar Provedor</button>
-        <button class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
+        <button type="button" class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
     </form>
 </body>
 </html>

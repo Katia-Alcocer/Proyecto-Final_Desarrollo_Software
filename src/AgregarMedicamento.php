@@ -82,7 +82,7 @@ try {
         <input type="hidden" id="estatus" name="estatus" value="Disponible">
 
         <button type="submit">Agregar Medicamento</button>
-        <button class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
+        <button type="button" class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
     </form>
 </body>
 </html>

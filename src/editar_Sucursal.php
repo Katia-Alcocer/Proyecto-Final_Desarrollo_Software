@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <button  class="act" type="submit">Guardar Cambios</button>
         </div>
         <div>
-        <button class="exit-button" type="button" onclick="window.location.href='AgregarSucursal.php'">Salir sin Guardar</button>
+        <button class="exit-button" type="button" onclick="window.location.href='ListaSucursales.php'">Salir sin Guardar</button>
         </div></div>
     </form>
 </body>

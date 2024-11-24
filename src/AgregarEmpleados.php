@@ -83,7 +83,7 @@ $puestos = $pdo->query("SELECT idPuesto, Puesto, salario FROM Puesto")->fetchAll
         </select>
     </div>
         <button type="submit">Agregar Empleado</button>
-        <button class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
+        <button type="button" class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
     </form>
 </body>
 </html>

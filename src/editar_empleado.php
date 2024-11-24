@@ -59,11 +59,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':idEmpleado', $idEmpleado);
 
     if ($stmt->execute()) {
-        echo "<p>Empleado actualizado con éxito.</p>";
-        echo "<a href='Listaempleados.php'>Volver a la lista de empleados</a>";
+        // Redirigir con mensaje de éxito
+        header("Location: Listaempleados.php?mensaje=Empleado actualizado con éxito.");
         exit;
     } else {
-        echo "<p>Error al actualizar el empleado.</p>";
+        // Redirigir con mensaje de error
+        header("Location: Listaempleados.php?mensaje=Error al actualizar el empleado.");
+        exit;
     }
 }
 ?>
@@ -126,7 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
         </select>
 
-        <button class="exit-button" onclick="window.location.href='Listaempleados.php';">Cancelar</button>
+        <button class="exit-button" type="button" onclick="window.location.href='Listaempleados.php';">Salir sin Guardar</button>
+        
     </div></div>
 
     </form>

@@ -32,7 +32,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <input type="password" id="contraseña" name="Clave" required>
 
         <button type="submit">Agregar Sucursal</button>
-        <button class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
+        <button type="button" class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
     </form>
 </body>
 </html>

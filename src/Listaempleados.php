@@ -36,9 +36,13 @@ function insertarEmpleado($pdo, $nombre, $apellido_p, $apellido_m, $telefono, $c
     $stmt->bindParam(':idPuesto', $idPuesto);
 
     if ($stmt->execute()) {
-        echo "<p>Empleado agregado con éxito.</p>";
+        // Redirigir con mensaje de éxito
+        header("Location: Listaempleados.php?mensaje=Empleado agregado con éxito.");
+        exit;
     } else {
-        echo "<p>Error al agregar el empleado.</p>";
+        // Redirigir con mensaje de error
+        header("Location: Listaempleados.php?mensaje=Error al agregar el empleado.");
+        exit;
     }
 }
 
@@ -75,6 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Obtener todos los empleados para mostrar
 $empleados = obtenerEmpleados($pdo);
 ?>
+<?php
+// Verificar si hay un mensaje en la URL
+if (isset($_GET['mensaje'])) {
+    echo "<div class='mensaje'>" . htmlspecialchars($_GET['mensaje']) . "</div>";
+}
+?>
+
+<!-- Aquí continúa el resto de tu código para listar los empleados -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -124,7 +137,8 @@ $empleados = obtenerEmpleados($pdo);
              <span>
                     <a href='editar_empleado.php?id=" . htmlspecialchars($empleado['idEmpleado']) . "'>
                         <img src='imagenes/Editar.png' alt='Editar'>
-                    </a><a href='eliminar_empleado.php?id=" . htmlspecialchars($empleado['idEmpleado']) . "' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este empleado?');\">
+                    </a>
+                    <a href='eliminar_empleado.php?id=" . htmlspecialchars($empleado['idEmpleado']) . "' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este empleado?');\">
                     <img src='imagenes/Eliminar.png' alt='Eliminar'>
                     </a>
                      </span>

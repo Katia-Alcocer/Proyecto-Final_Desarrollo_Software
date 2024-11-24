@@ -87,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
         <div>
         <button class="exit-button" type="button" onclick="window.location.href='ListaProvedores.php'">Salir sin Guardar</button>
+        
         </div></div>
     </form>
 </body>

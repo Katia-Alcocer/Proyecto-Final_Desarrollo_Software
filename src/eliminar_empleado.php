@@ -21,13 +21,17 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $stmt->bindParam(':idEmpleado', $idEmpleado);
 
     if ($stmt->execute()) {
-        echo "<p>Empleado eliminado con éxito.</p>";
+        // Redirigir con mensaje de éxito
+        header("Location: Listaempleados.php?mensaje=Empleado eliminado con éxito.");
+        exit;
     } else {
-        echo "<p>Error al eliminar el empleado.</p>";
+        // Redirigir con mensaje de error
+        header("Location: Listaempleados.php?mensaje=Error al eliminar el empleado.");
+        exit;
     }
 } else {
-    echo "<p>ID de empleado no válido.</p>";
+    // Redirigir con mensaje de error si el ID no es válido
+    header("Location: Listaempleados.php?mensaje=ID de empleado no válido.");
+    exit;
 }
 ?>
-<a href="Listaempleados.php">Volver a la lista de empleados</a>
-
