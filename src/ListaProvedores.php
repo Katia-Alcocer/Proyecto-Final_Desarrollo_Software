@@ -68,6 +68,7 @@ $proveedores = obtenerProvedor($pdo);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Proveedores</title>
     <link rel="icon" type="image/x-icon" href="imagenes/Logo1.jpg">
+    <link rel="stylesheet" type="text/css" href="styleListas.css">
 </head>
 <body>
 
@@ -90,12 +91,14 @@ $proveedores = obtenerProvedor($pdo);
             echo "<td>" . htmlspecialchars($proveedor['Telefono']) . "</td>";
             echo "<td>" . htmlspecialchars($proveedor['Direccion']) . "</td>";
             echo "<td>
+             <span>
                 <a href='editar_Provedor.php?id=" . $proveedor['idProveedor'] . "'>
                     <img src='imagenes/Editar.png' alt='Editar'>
                 </a>
-                <a href='eliminar_Provedor.php?id=" . $proveedor['idProveedor'] . "'>
+               <a href='eliminar_Provedor.php?id=" . $proveedor['idProveedor'] . "' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este proveedor?');\">
                     <img src='imagenes/Eliminar.png' alt='Eliminar'>
                 </a>
+                 </span>
             </td>";
             echo "</tr>";
         }

@@ -82,6 +82,7 @@ $empleados = obtenerEmpleados($pdo);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Empleados</title>
     <link rel="icon" type="image/x-icon" href="imagenes/Logo1.jpg">
+    <link rel="stylesheet" type="text/css" href="styleListas.css">
     <style>
         /* El estilo permanece igual */
     </style>
@@ -120,12 +121,13 @@ $empleados = obtenerEmpleados($pdo);
             echo "<td>" . htmlspecialchars($empleado['Sucursal']) . "</td>";
             echo "<td>" . htmlspecialchars($empleado['Puesto']) . "</td>";
             echo "<td>
+             <span>
                     <a href='editar_empleado.php?id=" . htmlspecialchars($empleado['idEmpleado']) . "'>
                         <img src='imagenes/Editar.png' alt='Editar'>
+                    </a><a href='eliminar_empleado.php?id=" . htmlspecialchars($empleado['idEmpleado']) . "' onclick=\"return confirm('¿Estás seguro de que deseas eliminar este empleado?');\">
+                    <img src='imagenes/Eliminar.png' alt='Eliminar'>
                     </a>
-                    <a href='eliminar_empleado.php?id=" . htmlspecialchars($empleado['idEmpleado']) . "'>
-                        <img src='imagenes/Eliminar.png' alt='Eliminar'>
-                    </a>
+                     </span>
                   </td>";
             echo "</tr>";
         }

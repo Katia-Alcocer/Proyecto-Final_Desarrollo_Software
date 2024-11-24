@@ -73,7 +73,7 @@ $medicamentos = obtenerMedicamentos($pdo);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Medicamentos</title>
-    <link rel="stylesheet" href="stylesMedicamentos.css">
+    <link rel="stylesheet" type="text/css" href="styleListas.css">
 </head>
 <body>
 
@@ -108,12 +108,16 @@ $medicamentos = obtenerMedicamentos($pdo);
                 <td><?php echo htmlspecialchars($medicamento['Descripcion']); ?></td>
                 <td><?php echo htmlspecialchars($medicamento['Estatus']); ?></td>
                 <td>
+                <span>
                     <a href="editar_medicamento.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>">
                         <img src="imagenes/Editar.png" alt="Editar">
                     </a>
-                    <a href="eliminar_medicamento.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>">
+                   
+                    <a href="eliminar_medicamento.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este medicamento?');">
                         <img src="imagenes/Eliminar.png" alt="Eliminar">
                     </a>
+                </span>
+
                 </td>
             </tr>
         <?php endforeach; ?>

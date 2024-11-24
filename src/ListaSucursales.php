@@ -85,6 +85,7 @@ $sucursales = obtenerSucursales($pdo);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Sucursales</title>
     <link rel="icon" type="image/x-icon" href="imagenes/Logo1.jpg">
+    <link rel="stylesheet" type="text/css" href="styleListas.css">
 </head>
 <body>
 
@@ -111,12 +112,15 @@ $sucursales = obtenerSucursales($pdo);
             echo "<td>" . htmlspecialchars($sucursal['Usuario']) . "</td>";
             echo "<td>" . htmlspecialchars($sucursal['Clave']) . "</td>";
             echo "<td>
+
+            <span>
                 <a href='editar_Sucursal.php?id=" . $sucursal['idSucursal'] . "'>
                     <img src='imagenes/Editar.png' alt='Editar'>
                 </a>
-                <a href='eliminar_Sucursal.php?id=" . $sucursal['idSucursal'] . "'>
+                <a href='eliminar_Sucursal.php?id=" . $sucursal['idSucursal']. "' onclick=\"return confirm('¿Estás seguro de que deseas eliminar esta sucursal?');\">
                     <img src='imagenes/Eliminar.png' alt='Eliminar'>
                 </a>
+                </span>
             </td>";
             echo "</tr>";
         }
