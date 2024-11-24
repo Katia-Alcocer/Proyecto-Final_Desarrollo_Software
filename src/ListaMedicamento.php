@@ -35,7 +35,7 @@ function insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio
 }
 
 // Función para obtener todos los medicamentos
-function obtenerMedicamentos($pdo) {
+function obtenerMedicamentosPorEstatus($pdo, $estatus) {
     $query = "
         SELECT 
             M.idMedicamento, M.Nombre, C.Tipo AS Clasificacion, M.Cantidad, M.PrecioCompra, M.PrecioVenta, 
@@ -43,11 +43,14 @@ function obtenerMedicamentos($pdo) {
         FROM Medicamento M
         JOIN ClasificacionM C ON M.idClasificacion = C.idClasificacion
         JOIN EliminacionMedicamento E ON M.idEliminacion = E.idEliminacion
-        JOIN Proveedores P ON M.idProveedor = P.idProveedor";
+        JOIN Proveedores P ON M.idProveedor = P.idProveedor
+        WHERE M.Estatus = :estatus";
     $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':estatus', $estatus);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 // Si se envió el formulario, insertar el nuevo medicamento
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -63,10 +66,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio_c, $precio_v, $idEliminacion, $idProveedor, $descripcion, $estatus);
 }
+// Obtener medicamentos con estatus "Disponible"
+$medicamentos = obtenerMedicamentosPorEstatus($pdo, 'Disponible');
 
-// Obtener todos los medicamentos para mostrar
-$medicamentos = obtenerMedicamentos($pdo);
 ?>
+
+<?php
+// Verificar si hay un mensaje en la URL
+if (isset($_GET['mensaje'])) {
+    echo "<div class='mensaje'>" . htmlspecialchars($_GET['mensaje']) . "</div>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -123,8 +134,14 @@ $medicamentos = obtenerMedicamentos($pdo);
         <?php endforeach; ?>
     </tbody>
 </table>
+<div style="margin-top: 20px;">
+    <button onclick="window.location.href='tabla_vendidos.php';">Ver Medicamentos Vendidos</button>
+    <button onclick="window.location.href='tabla_caducados.php';">Ver Medicamentos Caducados</button>
+    <button onclick="window.location.href='tabla_eliminados.php';">Ver Medicamentos Eliminados</button>
+    <button onclick="window.location.href='pagina_admin.html';">Regresar</button>
+</div>
 
-<button onclick="window.location.href='pagina_admin.html';">Regresar</button>
+
 
 </body>
 </html>

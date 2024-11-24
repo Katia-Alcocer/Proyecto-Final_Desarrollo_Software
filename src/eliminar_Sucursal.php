@@ -19,13 +19,17 @@ if (isset($_GET['id'])) {
     $stmt->bindParam(':id', $idSucursal, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        echo "<p>Sucursal eliminada con éxito.</p>";
+        // Redirigir con mensaje de éxito
+        header("Location: ListaSucursales.php?mensaje=Sucursal eliminada con éxito.");
+        exit;
     } else {
-        echo "<p>Error al eliminar la Sucursal.</p>";
+        // Redirigir con mensaje de error
+        header("Location: ListaSucursales.php?mensaje=Error al eliminar Sucursal.");
+        exit;
     }
 } else {
-    echo "<p>ID de Sucursal no especificado.</p>";
+    header("Location: ListaSucursales.php?mensaje=ID de Sucursal no especificado.");
+        exit;
 }
 
-echo '<a href="ListaSucursales.php">Volver a la lista de sucursales</a>';
 ?>

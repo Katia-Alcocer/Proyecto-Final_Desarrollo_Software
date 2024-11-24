@@ -21,16 +21,17 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $stmt->bindParam(':idMedicamento', $idMedicamento, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        // Redirige con un mensaje de éxito
-        header("Location: ListaMedicamento.php?mensaje=eliminado");
-        exit();
+        // Redirigir con mensaje de éxito
+        header("Location: ListaMedicamento.php?mensaje=Medicamento eliminado con éxito.");
+        exit;
     } else {
-        // Muestra un mensaje de error si no se pudo ejecutar la consulta
-        echo "<p>Error al intentar eliminar el medicamento.</p>";
+        // Redirigir con mensaje de error
+        header("Location: ListaMedicamento.php?mensaje=Error al eliminar el Medicamento.");
+        exit;
     }
 } else {
     // Redirige si no se pasa un ID válido
-    header("Location: ListaMedicamento.php?mensaje=error");
+    header("Location: ListaMedicamento.php?mensaje=ID no especificado");
     exit();
 }
 ?>

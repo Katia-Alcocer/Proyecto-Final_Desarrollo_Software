@@ -61,6 +61,13 @@ function obtenerProvedor($pdo) {
 $proveedores = obtenerProvedor($pdo);
 ?>
 
+<?php
+// Verificar si hay un mensaje en la URL
+if (isset($_GET['mensaje'])) {
+    echo "<div class='mensaje'>" . htmlspecialchars($_GET['mensaje']) . "</div>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

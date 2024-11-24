@@ -19,13 +19,18 @@ if (isset($_GET['id'])) {
     $stmt->bindParam(':id', $idProveedor, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        echo "<p>Proveedor eliminado con éxito.</p>";
+        // Redirigir con mensaje de éxito
+        header("Location: ListaProvedores.php?mensaje=Proveedor eliminado con éxito.");
+        exit;
     } else {
-        echo "<p>Error al eliminar el Proveedor.</p>";
+        // Redirigir con mensaje de error
+        header("Location: ListaProvedores.php?mensaje=Error al eliminar el Proveedor.");
+        exit;
     }
 } else {
-    echo "<p>ID de Proveedor no especificado.</p>";
+    header("Location: ListaProvedores.php?mensaje=ID de Proveedor no especificado.");
+        exit;
 }
 
-echo '<a href="ListaProvedores.php">Volver a la lista de Proveedores</a>';
+
 ?>
