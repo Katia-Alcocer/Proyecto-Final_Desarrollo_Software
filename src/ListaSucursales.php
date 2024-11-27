@@ -106,6 +106,9 @@ if (isset($_GET['mensaje'])) {
             <th>Dirección</th>
             <th>Usuario</th>
             <th>Contraseña</th>
+            <th>Ver Empleados</th>
+            <th>Medicamento Vendido</th>
+            <th>Medicamento Disponible</th>
             <th>Acciones</th> <!-- Columna para editar y eliminar -->
         </tr>
     </thead>
@@ -118,6 +121,19 @@ if (isset($_GET['mensaje'])) {
             echo "<td>" . htmlspecialchars($sucursal['Direccion']) . "</td>";
             echo "<td>" . htmlspecialchars($sucursal['Usuario']) . "</td>";
             echo "<td>" . htmlspecialchars($sucursal['Clave']) . "</td>";
+
+            echo "<td>  <a href='Listaempleados.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/Editar.png' alt='Editar'>
+                </a></td>";
+
+            echo "<td>  <a href='MedicamentoVendido.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/Editar.png' alt='Editar'>
+                </a></td>";
+
+            echo "<td>  <a href='ListaMedicamento.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/Editar.png' alt='Editar'>
+                </a></td>";
+
             echo "<td>
 
             <span>

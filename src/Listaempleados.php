@@ -46,7 +46,6 @@ function insertarEmpleado($pdo, $nombre, $apellido_p, $apellido_m, $telefono, $c
     }
 }
 
-// Función para obtener todos los empleados
 function obtenerEmpleados($pdo) {
     $query = "
     SELECT 
@@ -54,13 +53,24 @@ function obtenerEmpleados($pdo) {
         s.Nombre AS Sucursal, p.Puesto AS Puesto
     FROM Empleados e
     JOIN Sucursales s ON e.idSucursal = s.idSucursal
-    JOIN Puesto p ON e.idPuesto = p.idPuesto
-";
-
+    JOIN Puesto p ON e.idPuesto = p.idPuesto";
+    
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $query .= " WHERE e.idSucursal = :id"; 
+    }
+    
     $stmt = $pdo->prepare($query);
+    
+    // Asignar el parámetro solo si es necesario
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+    }
+    
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
 
 // Si se envió el formulario, insertar el nuevo empleado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
