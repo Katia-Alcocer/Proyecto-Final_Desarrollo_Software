@@ -52,17 +52,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     insertarSucursal($pdo, $nombre, $telefono, $direccion, $usuario, $clave);
 }
 
-function obtenerSucursales($pdo) {
+function obtenerSucursales($pdo, $estatus) {
     $query = "
     SELECT 
         s.idSucursal, s.Nombre, s.Telefono, s.Direccion, s.Usuario, s.Clave 
     FROM Sucursales s
+    WHERE s.estatus = :estatus
     ";
 
     $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':estatus', $estatus);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['Nombre'];
@@ -75,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     insertarSucursal($pdo, $nombre, $telefono, $direccion, $usuario, $clave);
 }
 
-$sucursales = obtenerSucursales($pdo);
+$sucursales = obtenerSucursales($pdo, 'Activo');
 ?>
 
 <?php
@@ -123,15 +126,15 @@ if (isset($_GET['mensaje'])) {
             echo "<td>" . htmlspecialchars($sucursal['Clave']) . "</td>";
 
             echo "<td>  <a href='Listaempleados.php?id=" . $sucursal['idSucursal'] . "'>
-                    <img src='imagenes/Editar.png' alt='Editar'>
+                    <img src='imagenes/ver.png' alt='Editar'>
                 </a></td>";
 
             echo "<td>  <a href='MedicamentoVendido.php?id=" . $sucursal['idSucursal'] . "'>
-                    <img src='imagenes/Editar.png' alt='Editar'>
+                    <img src='imagenes/MedVendido.png' alt='Editar'>
                 </a></td>";
 
             echo "<td>  <a href='ListaMedicamento.php?id=" . $sucursal['idSucursal'] . "'>
-                    <img src='imagenes/Editar.png' alt='Editar'>
+                    <img src='imagenes/MedDispo.png' alt='Editar'>
                 </a></td>";
 
             echo "<td>

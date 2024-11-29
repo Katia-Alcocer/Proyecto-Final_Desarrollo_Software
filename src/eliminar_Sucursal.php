@@ -11,25 +11,25 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $idSucursal = $_GET['id'];
     
-    $query = "DELETE FROM Sucursales WHERE idSucursal = :id";
+    // Cambiar el estatus a "Inactivo" en lugar de eliminar
+    $query = "UPDATE Sucursales SET estatus = 'Inactivo' WHERE idSucursal = :id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':id', $idSucursal, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
         // Redirigir con mensaje de éxito
-        header("Location: ListaSucursales.php?mensaje=Sucursal eliminada con éxito.");
+        header("Location: ListaSucursales.php?mensaje=Sucursal Eliminada.");
         exit;
     } else {
         // Redirigir con mensaje de error
-        header("Location: ListaSucursales.php?mensaje=Error al eliminar Sucursal.");
+        header("Location: ListaSucursales.php?mensaje=Error al eliminar la sucursal.");
         exit;
     }
 } else {
-    header("Location: ListaSucursales.php?mensaje=ID de Sucursal no especificado.");
-        exit;
+    header("Location: ListaSucursales.php?mensaje=ID de Sucursal no válido o no especificado.");
+    exit;
 }
-
 ?>

@@ -11,26 +11,26 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $idProveedor = $_GET['id'];
     
-    $query =  "DELETE FROM Proveedores WHERE idProveedor = :id";
+    // Cambiar el estatus a "Inactivo" en lugar de eliminar
+    $query = "UPDATE Proveedores SET estatus = 'Inactivo' WHERE idProveedor = :id";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':id', $idProveedor, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
         // Redirigir con mensaje de éxito
-        header("Location: ListaProvedores.php?mensaje=Proveedor eliminado con éxito.");
+        header("Location: ListaProvedores.php?mensaje=Proveedor eliminado.");
         exit;
     } else {
         // Redirigir con mensaje de error
-        header("Location: ListaProvedores.php?mensaje=Error al eliminar el Proveedor.");
+        header("Location: ListaProvedores.php?mensaje=Error al eliminar proveedor.");
         exit;
     }
 } else {
-    header("Location: ListaProvedores.php?mensaje=ID de Proveedor no especificado.");
-        exit;
+    header("Location: ListaProvedores.php?mensaje=ID de proveedor no válido o no especificado.");
+    exit;
 }
-
-
 ?>
+

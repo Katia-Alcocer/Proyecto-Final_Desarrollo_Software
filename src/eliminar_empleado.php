@@ -11,22 +11,22 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-// Verificar si se envió el ID del empleado a eliminar
+// Verificar si se envió el ID del empleado a actualizar
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $idEmpleado = $_GET['id'];
 
-    // Preparar la consulta para eliminar
-    $query = "DELETE FROM Empleados WHERE idEmpleado = :idEmpleado";
+    // Preparar la consulta para actualizar el estatus a "Inactivo"
+    $query = "UPDATE Empleados SET estatus = 'Inactivo' WHERE idEmpleado = :idEmpleado";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':idEmpleado', $idEmpleado);
 
     if ($stmt->execute()) {
         // Redirigir con mensaje de éxito
-        header("Location: Listaempleados.php?mensaje=Empleado eliminado con éxito.");
+        header("Location: Listaempleados.php?mensaje=Empleado Eliminado.");
         exit;
     } else {
         // Redirigir con mensaje de error
-        header("Location: Listaempleados.php?mensaje=Error al eliminar el empleado.");
+        header("Location: Listaempleados.php?mensaje=Error al eliminar Empleado.");
         exit;
     }
 } else {
