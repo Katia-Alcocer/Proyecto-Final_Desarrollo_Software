@@ -23,7 +23,7 @@ try {
     <link rel="stylesheet" type="text/css" href="styleAgregar.css">
 </head>
 <body>
-    <h1>Registro de Empleados</h1>
+    <h1>Registro de Medicamento</h1>
     <form id="employee-form" action="ListaMedicamento.php" method="post">
     <div class="form-group">
         <label for="nombre">Nombre:</label>

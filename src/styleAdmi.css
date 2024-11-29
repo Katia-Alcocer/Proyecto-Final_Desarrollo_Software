@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.material-symbols-outlined{
+    padding: 0 10px 10px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #e4e2de;
+}
+
+header {
+    background-color: #62989b;
+    color: #fff;
+    padding: 10px 20px;
+    height: 1.25cm;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+header ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+main {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+
+.left, .right {
+    width: 50%;
+    background-color:#e4e2de;
+    padding: 0px;/*Espacio Interno*/
+    border-radius: 8px;
+    height: 80vh ;
+}
+.arriba, .abajo{
+    display: flex;
+    height: 50%;
+    width: 100%;
+}
+.arriba1{
+    text-align: left;
+    height: 100%;
+    width: 50%;
+    background-color:#e4e2de;
+    border-radius: 8px;
+    padding: 15px;
+}
+.arriba2{
+     text-align:right ;
+     height: 100%;
+     width: 50%;
+     background-color:#e4e2de ;
+     border-radius: 8px;
+     padding: 15px;
+}
+.abajo1{
+    height: 100%;
+    width: 50%;
+    background-color:#e4e2de ;
+    border-radius: 8px;
+    padding: 15px;
+
+}
+.abajo2{
+     height: 100%;
+     width: 50%;
+     background-color:#e4e2de ;
+     border-radius: 8px;
+     padding: 15px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto; /* Mantiene el footer en la parte inferior */
+}
+
+footer a {
+    color: #2f8b94 ;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+button{
+    width:100% ;
+    height: 100%;
+    border-radius:10px ;
+    padding: 10px;
+    cursor: pointer;
+    border:none ;
+    position:relative ;
+
+}
+button:hover {
+    background-color: #4e924f ;
+}
+.b1{
+    background:#7fca7a ;
+}
+.b2{
+    background:#7fc3c4 ;
+}
+.b3{
+    background:#a775b2 ;
+}
+.b4{
+    background:#b2758e ;
+}
+.b5{
+    background:#75b2a6 ;
+}
+.b6{
+    background:#b2b075 ;
+}
+.b7{
+    background:#3f5f81 ;
+}
+.b8{
+    background:#d86453 ;
+}
+.log{
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    height:60% ;
+}
+.tito{
+    text-align: center;
+    font-size: 35px;
+    font-family: cursive;
+    position: absolute;
+    top: 20px;
+    left: 35%;
+    transform: translateX(-20%);
+}
+.tit{
+    text-align: center;
+    font-size: 35px;
+    font-family: cursive;
+    position: absolute;
+    top: 1px;
+    left: 35%;
+    transform: translateX(-30%);
+}
