@@ -22,16 +22,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     if ($stmt->execute()) {
         // Redirigir con mensaje de éxito
-        header("Location: ListaSucursales.php?mensaje=Medicamento eliminado con éxito.");
+        header("Location: ChecarCaducidades.php?mensaje=Medicamento eliminado con éxito.");
         exit;
     } else {
         // Redirigir con mensaje de error
-        header("Location: ListaSucursales.php?mensaje=Error al eliminar el Medicamento.");
+        header("Location: ChecarCaducidades.php?mensaje=Error al eliminar el Medicamento.");
         exit;
     }
 } else {
     // Redirige si no se pasa un ID válido
-    header("Location: ListaSucursales.php?mensaje=ID no especificado");
+    header("Location: ChecarCaducidades.php?mensaje=ID no especificado");
     exit();
 }
 ?>
