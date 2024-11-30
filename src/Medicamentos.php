@@ -127,7 +127,7 @@ if (isset($_GET['mensaje'])) {
     </tbody>
 </table>
 
-    <button onclick="window.location.href='pagina_admin.php';">
+    <button onclick="window.location.href='pagina_admin.html';">
         Regresar
     </button>
 

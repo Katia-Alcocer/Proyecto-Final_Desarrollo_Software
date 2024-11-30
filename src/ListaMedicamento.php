@@ -12,10 +12,10 @@ try {
 }
 
 // Función para insertar un medicamento
-function insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio_c, $precio_v, $idEliminacion, $idProveedor, $descripcion, $estatus,$fechaCaducidad) {
+function insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio_c, $precio_v, $idEliminacion, $idProveedor, $descripcion, $estatus, $fechaCaducidad, $idSucursal) {
     $query = "
-        INSERT INTO Medicamento (Nombre, idClasificacion, Cantidad, PrecioCompra, PrecioVenta, idEliminacion, idProveedor, Descripcion, Estatus,fechaCaducidad) 
-        VALUES (:nombre, :idClasificacion, :cantidad, :precio_c, :precio_v, :idEliminacion, :idProveedor, :descripcion, :estatus, :fechacaducidad)";
+        INSERT INTO Medicamento (Nombre, idClasificacion, Cantidad, PrecioCompra, PrecioVenta, idEliminacion, idProveedor, Descripcion, Estatus, fechaCaducidad, idSucursal) 
+        VALUES (:nombre, :idClasificacion, :cantidad, :precio_c, :precio_v, :idEliminacion, :idProveedor, :descripcion, :estatus, :fechaCaducidad, :idSucursal)";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':nombre', $nombre);
     $stmt->bindParam(':idClasificacion', $idClasificacion);
@@ -26,15 +26,16 @@ function insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio
     $stmt->bindParam(':idProveedor', $idProveedor);
     $stmt->bindParam(':descripcion', $descripcion);
     $stmt->bindParam(':estatus', $estatus);
-    $stmt->bindParam(':fechacaducidad', $fechaCaducidad);
+    $stmt->bindParam(':fechaCaducidad', $fechaCaducidad);
+    $stmt->bindParam(':idSucursal', $idSucursal);
 
     if ($stmt->execute()) {
         echo "<p>Medicamento agregado con éxito.</p>";
     } else {
         echo "<p>Error al agregar el medicamento.</p>";
     }
-
 }
+
 
 // Función para obtener todos los medicamentos
 
@@ -77,8 +78,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descripcion = strtoupper($_POST['descripcion']);
     $estatus = 'Disponible'; // Estatus por defecto
     $fechaCaducidad = $_POST['fechaCaducidad'];
+    $idSucursal = $_POST['idSucursal'];
 
-    insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio_c, $precio_v, $idEliminacion, $idProveedor, $descripcion, $estatus,$fechaCaducidad);
+    insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio_c, $precio_v, $idEliminacion, $idProveedor, $descripcion, $estatus,$fechaCaducidad,$idSucursal);
 }
 // Obtener medicamentos con estatus "Disponible"
 $medicamentos = obtenerMedicamentosPorEstatusYSucursal($pdo, 'Disponible',$idSucursal);

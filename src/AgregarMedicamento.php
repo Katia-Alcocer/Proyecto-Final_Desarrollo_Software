@@ -6,6 +6,7 @@ try {
 
     $clasificacion = $pdo->query("SELECT idClasificacion, Tipo FROM ClasificacionM")->fetchAll(PDO::FETCH_ASSOC);
     $eliminacion = $pdo->query("SELECT idEliminacion, MedRegresable FROM EliminacionMedicamento")->fetchAll(PDO::FETCH_ASSOC);
+    $sucursales = $pdo->query("SELECT idSucursal, nombre FROM Sucursales")->fetchAll(PDO::FETCH_ASSOC);
     $provedores = $pdo->query("SELECT idProveedor, Nombre FROM Proveedores")->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
     die("Error al conectar con la base de datos: " . $e->getMessage());
@@ -75,14 +76,23 @@ try {
         </select>
     </div>
       <div class="form-group">
-        <label for="fecha_caducidad">Fecha de Caducidad:</label>
-      <input type="date" id="fecha_caducidad" name="fecha_caducidad" required>
+        <label for="fechaCaducidad">Fecha de Caducidad:</label>
+      <input type="date" id="fechaCaducidad" name="fechaCaducidad" required>
     </div>
 
 
     <div class="form-group">
         <label for="descripcion">Descripción:</label>
         <input type="text" id="descripcion" name="descripcion" required>
+    </div>
+    <div class="form-group">
+        <label for="sucursal">Sucursal:</label>
+        <select id="sucursal" name="idSucursal" required>
+            <option value="">Selecciona una sucursal</option>
+            <?php foreach ($sucursales as $sucursal): ?>
+                <option value="<?php echo $sucursal['idSucursal']; ?>"><?php echo $sucursal['nombre']; ?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
         <input type="hidden" id="estatus" name="estatus" value="Disponible">
 

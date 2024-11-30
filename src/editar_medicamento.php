@@ -141,6 +141,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                 </select>
 
+                <label for="sucursal">Sucursal:</label>
+                <select id="sucursal" name="idSucursal" required>
+                    <?php
+                    $sucursales = $pdo->query("SELECT idSucursal, Nombre FROM Sucursales")->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($sucursales as $sucursal) {
+                        $selected = $sucursal['idSucursal'] == $medicamento['idSucursal'] ? 'selected' : '';
+                        echo "<option value='{$sucursal['idSucursal']}' $selected>{$sucursal['Nombre']}</option>";
+                    }
+                    ?>
+                </select>
+
                 <button class="exit-button" type="button" onclick="window.location.href='ListaSucursales.php';">Salir sin Guardar</button>
 
               
