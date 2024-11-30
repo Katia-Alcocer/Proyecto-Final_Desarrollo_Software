@@ -66,18 +66,6 @@ function obtenerSucursales($pdo, $estatus) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST['Nombre'];
-    $telefono = $_POST['Telefono'];
-    $direccion = $_POST['Direccion'];  
-    $usuario = $_POST['Usuario'];     
-    $clave = $_POST['Clave'];
-   // $clave = password_hash($_POST['Clave'], PASSWORD_DEFAULT);
-
-    insertarSucursal($pdo, $nombre, $telefono, $direccion, $usuario, $clave);
-}
-
 $sucursales = obtenerSucursales($pdo, 'Activo');
 ?>
 

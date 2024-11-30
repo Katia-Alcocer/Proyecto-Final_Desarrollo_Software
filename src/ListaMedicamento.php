@@ -35,7 +35,7 @@ function insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio
 }
 
 // Función para obtener todos los medicamentos
-function obtenerMedicamentosPorEstatus($pdo, $estatus) {
+function obtenerMedicamentosPorEstatusYSucursal($pdo, $estatus, $idSucursal) {
     $query = "
         SELECT 
             M.idMedicamento, M.Nombre, C.Tipo AS Clasificacion, M.Cantidad, M.PrecioCompra, M.PrecioVenta, 
@@ -44,11 +44,21 @@ function obtenerMedicamentosPorEstatus($pdo, $estatus) {
         JOIN ClasificacionM C ON M.idClasificacion = C.idClasificacion
         JOIN EliminacionMedicamento E ON M.idEliminacion = E.idEliminacion
         JOIN Proveedores P ON M.idProveedor = P.idProveedor
-        WHERE M.Estatus = :estatus";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':estatus', $estatus);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        WHERE M.Estatus = :estatus AND M.idSucursal = :idSucursal";
+    
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $query .= " AND M.idSucursal = :idSucursal"; 
+        }
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':estatus', $estatus);
+        
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $stmt->bindParam(':idSucursal', $_GET['id'], PDO::PARAM_INT);
+        }
+        
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
@@ -67,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio_c, $precio_v, $idEliminacion, $idProveedor, $descripcion, $estatus);
 }
 // Obtener medicamentos con estatus "Disponible"
-$medicamentos = obtenerMedicamentosPorEstatus($pdo, 'Disponible');
+$medicamentos = obtenerMedicamentosPorEstatusYSucursal($pdo, 'Disponible',$idSucursal);
 
 ?>
 
@@ -134,12 +144,23 @@ if (isset($_GET['mensaje'])) {
         <?php endforeach; ?>
     </tbody>
 </table>
+
 <div style="margin-top: 20px;">
-    <button onclick="window.location.href='tabla_vendidos.php';">Ver Medicamentos Vendidos</button>
-    <button onclick="window.location.href='tabla_caducados.php';">Ver Medicamentos Caducados</button>
-    <button onclick="window.location.href='tabla_eliminados.php';">Ver Medicamentos Eliminados</button>
-    <button onclick="window.location.href='pagina_admin.html';">Regresar</button>
+    <button onclick="window.location.href='tabla_vendidos.php?idSucursal=<?php echo htmlspecialchars($idSucursal); ?>';">
+        Ver Medicamentos Vendidos
+    </button>
+    <button onclick="window.location.href='tabla_caducados.php?idSucursal=<?php echo htmlspecialchars($idSucursal); ?>';">
+        Ver Medicamentos Caducados
+    </button>
+    <button onclick="window.location.href='tabla_eliminados.php?idSucursal=<?php echo htmlspecialchars($idSucursal); ?>';">
+        Ver Medicamentos Eliminados
+    </button>
+    <button onclick="window.location.href='ListaSucursales.php';">
+        Regresar
+    </button>
+    <button onclick="window.location.href='ListaSucursales.php';">Regresar</button>
 </div>
+
 
 
 

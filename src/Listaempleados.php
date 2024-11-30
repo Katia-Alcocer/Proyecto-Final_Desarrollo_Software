@@ -46,7 +46,7 @@ function insertarEmpleado($pdo, $nombre, $apellido_p, $apellido_m, $telefono, $c
     }
 }
 
-function obtenerEmpleados($pdo,$estatus) {
+function obtenerEmpleados($pdo, $estatus) {
     $query = "
     SELECT 
         e.idEmpleado, e.Nombre, e.ApellidoP, e.ApellidoM, e.Telefono, e.CURP, e.RFC, e.Salario, 
@@ -55,18 +55,19 @@ function obtenerEmpleados($pdo,$estatus) {
     JOIN Sucursales s ON e.idSucursal = s.idSucursal
     JOIN Puesto p ON e.idPuesto = p.idPuesto
     WHERE e.estatus = :estatus";
-    
+
+    // Verificar si se pasó un ID de sucursal
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $query .= " WHERE e.idSucursal = :id"; 
+        $query .= " AND e.idSucursal = :idSucursal"; 
     }
     
     $stmt = $pdo->prepare($query);
-    
-    // Asignar el parámetro solo si es necesario
-    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
-    }
     $stmt->bindParam(':estatus', $estatus);
+    
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $stmt->bindParam(':idSucursal', $_GET['id'], PDO::PARAM_INT);
+    }
+    
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -160,7 +161,7 @@ if (isset($_GET['mensaje'])) {
     </tbody>
 </table>
 
-<button onclick="window.location.href='pagina_admin.html';">Regresar</button>
+<button onclick="window.location.href='ListaSucursales.php';">Regresar</button>
 
 </body>
 </html>
