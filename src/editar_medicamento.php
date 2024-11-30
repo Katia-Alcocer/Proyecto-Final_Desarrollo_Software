@@ -40,11 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idClasificacion = $_POST['idClasificacion'];
     $idEliminacion = $_POST['idEliminacion'];
     $idProveedor = $_POST['idProveedor'];
+    $fechaCaducidad = $_POST['fechaCaducidad'];
 
     $query = "UPDATE Medicamento 
               SET Nombre = :nombre, Cantidad = :cantidad, PrecioCompra = :precio_c, 
                   PrecioVenta = :precio_v, Descripcion = :descripcion, 
-                  idClasificacion = :idClasificacion, idEliminacion = :idEliminacion, idProveedor = :idProveedor
+                  idClasificacion = :idClasificacion, idEliminacion = :idEliminacion, idProveedor = :idProveedor,fechaCaducidad = :fechaCaducidad
               WHERE idMedicamento = :idMedicamento";
 
     $stmt = $pdo->prepare($query);
@@ -57,10 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':idEliminacion', $idEliminacion);
     $stmt->bindParam(':idProveedor', $idProveedor);
     $stmt->bindParam(':idMedicamento', $idMedicamento);
+    $stmt->bindParam(':fechaCaducidad', $fechaCaducidad);
 
     if ($stmt->execute()) {
         // Redirigir a la lista de medicamentos después de la actualización
-        header("Location: ListaMedicamento.php");
+        header("Location: ListaSucursales.php");
         exit;
     } else {
         echo "<p>Error al actualizar el medicamento.</p>";
@@ -93,8 +95,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <label for="precio_v">Precio Venta:</label>
                 <input type="number" step="0.01" id="precio_v" name="precio_v" value="<?php echo htmlspecialchars($medicamento['PrecioVenta']); ?>" required>
-                <button class="act" type="submit">Actualizar</button>
-           
+               
+                <label for="fecha_caducidad">Fecha de Caducidad:</label>
+                <input type="date" id="fecha_caducidad" name="fecha_caducidad" required>
+               
+                  <button class="act" type="submit">Actualizar</button>
+                   
             </div>
 
                 <div>
@@ -135,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ?>
                 </select>
 
-                <button class="exit-button" type="button" onclick="window.location.href='ListaMedicamento.php';">Salir sin Guardar</button>
+                <button class="exit-button" type="button" onclick="window.location.href='ListaSucursales.php';">Salir sin Guardar</button>
 
               
             </div>

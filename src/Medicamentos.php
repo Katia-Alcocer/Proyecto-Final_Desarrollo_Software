@@ -38,28 +38,17 @@ function insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio
 
 // Función para obtener todos los medicamentos
 
-function obtenerMedicamentosPorEstatusYSucursal($pdo, $estatus, $idSucursal) {
+function obtenerMedicamentos($pdo) {
     $query = "
         SELECT 
             M.idMedicamento, M.Nombre, C.Tipo AS Clasificacion, M.Cantidad, M.PrecioCompra, M.PrecioVenta, 
-            E.MedRegresable, P.Nombre AS Proveedor, M.Descripcion, M.Estatus
+            E.MedRegresable, P.Nombre AS Proveedor, M.Descripcion, M.Estatus, M.fechaCaducidad
         FROM Medicamento M
         JOIN ClasificacionM C ON M.idClasificacion = C.idClasificacion
         JOIN EliminacionMedicamento E ON M.idEliminacion = E.idEliminacion
-        JOIN Proveedores P ON M.idProveedor = P.idProveedor
-        WHERE M.Estatus = :estatus AND M.idSucursal = :idSucursal";
+        JOIN Proveedores P ON M.idProveedor = P.idProveedor";
     
-        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-            $query .= " AND M.idSucursal = :idSucursal"; 
-        }
-        
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':estatus', $estatus);
-        
-        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-            $stmt->bindParam(':idSucursal', $_GET['id'], PDO::PARAM_INT);
-        }
-        
+        $stmt = $pdo->prepare($query);  
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -81,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio_c, $precio_v, $idEliminacion, $idProveedor, $descripcion, $estatus,$fechaCaducidad);
 }
 // Obtener medicamentos con estatus "Disponible"
-$medicamentos = obtenerMedicamentosPorEstatusYSucursal($pdo, 'Disponible',$idSucursal);
+$medicamentos = obtenerMedicamentos($pdo);
 
 ?>
 
@@ -117,7 +106,7 @@ if (isset($_GET['mensaje'])) {
             <th>Proveedor</th>
             <th>Descripción</th>
             <th>Estatus</th>
-            <th>Acciones</th>
+            <th>Fecha de Caducidad</th>
         </tr>
     </thead>
     <tbody>
@@ -132,24 +121,13 @@ if (isset($_GET['mensaje'])) {
                 <td><?php echo htmlspecialchars($medicamento['Proveedor']); ?></td>
                 <td><?php echo htmlspecialchars($medicamento['Descripcion']); ?></td>
                 <td><?php echo htmlspecialchars($medicamento['Estatus']); ?></td>
-                <td>
-                <span>
-                    <a href="editar_medicamento.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>">
-                        <img src="imagenes/Editar.png" alt="Editar">
-                    </a>
-                   
-                    <a href="eliminar_medicamento.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>" onclick="return confirm('¿Estás seguro de que deseas eliminar este medicamento?');">
-                        <img src="imagenes/Eliminar.png" alt="Eliminar">
-                    </a>
-                </span>
-
-                </td>
+                <td><?php echo htmlspecialchars($medicamento['fechaCaducidad']); ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
-    <button onclick="window.location.href='ListaSucursales.php';">
+    <button onclick="window.location.href='pagina_admin.php';">
         Regresar
     </button>
 

@@ -24,7 +24,7 @@ try {
 </head>
 <body>
     <h1>Registro de Medicamento</h1>
-    <form id="employee-form" action="ListaMedicamento.php" method="post">
+    <form id="employee-form" action="Medicamentos.php" method="post">
     <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -74,6 +74,11 @@ try {
             <?php endforeach; ?>
         </select>
     </div>
+      <div class="form-group">
+        <label for="fecha_caducidad">Fecha de Caducidad:</label>
+      <input type="date" id="fecha_caducidad" name="fecha_caducidad" required>
+    </div>
+
 
     <div class="form-group">
         <label for="descripcion">Descripción:</label>

@@ -51,7 +51,7 @@ $medicamentos = obtenerMedicamentos($pdo, 'Eliminado',$idSucursal);
 </head>
 <body>
 
-<h1>Medicamentos Caducados</h1>
+<h1>Medicamentos Eliminados</h1>
 
 <table border="1">
     <thead>
