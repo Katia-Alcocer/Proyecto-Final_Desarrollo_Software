@@ -11,7 +11,7 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-function obtenerMedicamentosPorEstatus($pdo, $estatus) {
+function obtenerMedicamentos($pdo, $estatus, $idSucursal) {
     $query = "
         SELECT 
             M.idMedicamento, M.Nombre, C.Tipo AS Clasificacion, M.Cantidad, M.PrecioCompra, M.PrecioVenta, 
@@ -20,15 +20,25 @@ function obtenerMedicamentosPorEstatus($pdo, $estatus) {
         JOIN ClasificacionM C ON M.idClasificacion = C.idClasificacion
         JOIN EliminacionMedicamento E ON M.idEliminacion = E.idEliminacion
         JOIN Proveedores P ON M.idProveedor = P.idProveedor
-        WHERE M.Estatus = :estatus";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':estatus', $estatus);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        WHERE M.Estatus = :estatus AND M.idSucursal = :idSucursal";
+    
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $query .= " AND M.idSucursal = :idSucursal"; 
+        }
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':estatus', $estatus);
+        
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $stmt->bindParam(':idSucursal', $_GET['id'], PDO::PARAM_INT);
+        }
+        
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 // Obtener medicamentos con estatus "Vendido"
-$medicamentos = obtenerMedicamentosPorEstatus($pdo, 'Caducado');
+$medicamentos = obtenerMedicamentos($pdo, 'Caducado',$idSucursal);
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +84,7 @@ $medicamentos = obtenerMedicamentosPorEstatus($pdo, 'Caducado');
     </tbody>
 </table>
 
-<button onclick="window.location.href='ListaMedicamento.php';">Regresar</button>
+<button onclick="window.location.href='ListaSucursales.php';">Regresar</button>
 
 </body>
 </html>

@@ -35,6 +35,7 @@ function insertarMedicamento($pdo, $nombre, $idClasificacion, $cantidad, $precio
 }
 
 // Función para obtener todos los medicamentos
+
 function obtenerMedicamentosPorEstatusYSucursal($pdo, $estatus, $idSucursal) {
     $query = "
         SELECT 
@@ -145,24 +146,9 @@ if (isset($_GET['mensaje'])) {
     </tbody>
 </table>
 
-<div style="margin-top: 20px;">
-    <button onclick="window.location.href='tabla_vendidos.php?idSucursal=<?php echo htmlspecialchars($idSucursal); ?>';">
-        Ver Medicamentos Vendidos
-    </button>
-    <button onclick="window.location.href='tabla_caducados.php?idSucursal=<?php echo htmlspecialchars($idSucursal); ?>';">
-        Ver Medicamentos Caducados
-    </button>
-    <button onclick="window.location.href='tabla_eliminados.php?idSucursal=<?php echo htmlspecialchars($idSucursal); ?>';">
-        Ver Medicamentos Eliminados
-    </button>
     <button onclick="window.location.href='ListaSucursales.php';">
         Regresar
     </button>
-    <button onclick="window.location.href='ListaSucursales.php';">Regresar</button>
-</div>
-
-
-
 
 </body>
 </html>

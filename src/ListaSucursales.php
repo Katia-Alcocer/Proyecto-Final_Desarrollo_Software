@@ -100,6 +100,8 @@ if (isset($_GET['mensaje'])) {
             <th>Ver Empleados</th>
             <th>Medicamento Vendido</th>
             <th>Medicamento Disponible</th>
+            <th>Medicamento Caducado</th>
+            <th>Medicamento Elimidado</th>
             <th>Acciones</th> <!-- Columna para editar y eliminar -->
         </tr>
     </thead>
@@ -117,13 +119,21 @@ if (isset($_GET['mensaje'])) {
                     <img src='imagenes/ver.png' alt='Editar'>
                 </a></td>";
 
-            echo "<td>  <a href='MedicamentoVendido.php?id=" . $sucursal['idSucursal'] . "'>
+            echo "<td>  <a href='tabla_vendidos.php?id=" . $sucursal['idSucursal'] . "'>
                     <img src='imagenes/MedVendido.png' alt='Editar'>
                 </a></td>";
 
             echo "<td>  <a href='ListaMedicamento.php?id=" . $sucursal['idSucursal'] . "'>
                     <img src='imagenes/MedDispo.png' alt='Editar'>
                 </a></td>";
+
+            echo "<td>  <a href='tabla_caducados.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/MedDispo.png' alt='Editar'>
+            </a></td>";
+
+            echo "<td>  <a href='tabla_eliminados.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/MedDispo.png' alt='Editar'>
+            </a></td>";
 
             echo "<td>
 
