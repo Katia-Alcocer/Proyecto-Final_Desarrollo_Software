@@ -115,24 +115,24 @@ if (isset($_GET['mensaje'])) {
             echo "<td>" . htmlspecialchars($sucursal['Usuario']) . "</td>";
             echo "<td>" . htmlspecialchars($sucursal['Clave']) . "</td>";
 
-            echo "<td>  <a href='Listaempleados.php?id=" . $sucursal['idSucursal'] . "'>
+            echo "<td>  <a class='editable' href='Listaempleados.php?id=" . $sucursal['idSucursal'] . "'>
                     <img src='imagenes/ver.png' alt='Editar'>
                 </a></td>";
 
-            echo "<td>  <a href='tabla_vendidos.php?id=" . $sucursal['idSucursal'] . "'>
+            echo "<td>  <a <a class='editable' href='tabla_vendidos.php?id=" . $sucursal['idSucursal'] . "'>
                     <img src='imagenes/MedVendido.png' alt='Editar'>
                 </a></td>";
 
-            echo "<td>  <a href='ListaMedicamento.php?id=" . $sucursal['idSucursal'] . "'>
-                    <img src='imagenes/MedDispo.png' alt='Editar'>
+            echo "<td>  <a <a class='editable' href='ListaMedicamento.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/MedDisp.png' alt='Editar'>
                 </a></td>";
 
-            echo "<td>  <a href='tabla_caducados.php?id=" . $sucursal['idSucursal'] . "'>
-                    <img src='imagenes/MedDispo.png' alt='Editar'>
+            echo "<td>  <a <a class='editable' href='tabla_caducados.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/Caducado.png' alt='Editar'>
             </a></td>";
 
-            echo "<td>  <a href='tabla_eliminados.php?id=" . $sucursal['idSucursal'] . "'>
-                    <img src='imagenes/MedDispo.png' alt='Editar'>
+            echo "<td>  <a <a class='editable' href='tabla_eliminados.php?id=" . $sucursal['idSucursal'] . "'>
+                    <img src='imagenes/Eliminado.png' alt='Editar'>
             </a></td>";
 
             echo "<td>

@@ -53,7 +53,10 @@
         width: 20px;
         height: 20px;
     }
-
+    .editable{
+        width: 40px;
+        height: 40px;
+    }
     /* Estilo del botón de regresar */
     button {
         background-color: #007bff;
