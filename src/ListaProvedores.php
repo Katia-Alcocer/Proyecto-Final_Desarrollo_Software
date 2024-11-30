@@ -45,21 +45,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     insertarProvedor($pdo, $nombre, $telefono, $direccion);
 }
 
-function obtenerProvedor($pdo) {
+function obtenerProvedor($pdo,$estatus) {
     $query = "
     SELECT 
         p.idProveedor, p.Nombre, p.Telefono, p.Direccion 
     FROM Proveedores p
+    WHERE p.estatus = :estatus
     ";
 
     $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':estatus', $estatus);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 
-$proveedores = obtenerProvedor($pdo);
+$proveedores = obtenerProvedor($pdo,'Activo');
 ?>
+
 
 <?php
 // Verificar si hay un mensaje en la URL

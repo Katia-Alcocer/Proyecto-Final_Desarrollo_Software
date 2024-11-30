@@ -46,14 +46,15 @@ function insertarEmpleado($pdo, $nombre, $apellido_p, $apellido_m, $telefono, $c
     }
 }
 
-function obtenerEmpleados($pdo) {
+function obtenerEmpleados($pdo,$estatus) {
     $query = "
     SELECT 
         e.idEmpleado, e.Nombre, e.ApellidoP, e.ApellidoM, e.Telefono, e.CURP, e.RFC, e.Salario, 
         s.Nombre AS Sucursal, p.Puesto AS Puesto
     FROM Empleados e
     JOIN Sucursales s ON e.idSucursal = s.idSucursal
-    JOIN Puesto p ON e.idPuesto = p.idPuesto";
+    JOIN Puesto p ON e.idPuesto = p.idPuesto
+    WHERE e.estatus = :estatus";
     
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $query .= " WHERE e.idSucursal = :id"; 
@@ -65,11 +66,10 @@ function obtenerEmpleados($pdo) {
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     }
-    
+    $stmt->bindParam(':estatus', $estatus);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 
 // Si se envió el formulario, insertar el nuevo empleado
@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Obtener todos los empleados para mostrar
-$empleados = obtenerEmpleados($pdo);
+$empleados = obtenerEmpleados($pdo,'Activo');
 ?>
 <?php
 // Verificar si hay un mensaje en la URL
