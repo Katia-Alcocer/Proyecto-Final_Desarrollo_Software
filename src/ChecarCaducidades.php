@@ -11,8 +11,6 @@ try {
     die("Error en la conexión: " . $e->getMessage());
 }
 
-// Función para insertar un medicament
-
 // Función para obtener todos los medicamentos
 
 function obtenerMedicamentos($pdo) {
@@ -32,7 +30,6 @@ function obtenerMedicamentos($pdo) {
 }
 
 
-// Obtener medicamentos con estatus "Disponible y Caducado"
 $medicamentos = obtenerMedicamentos($pdo);
 
 ?>
@@ -92,8 +89,8 @@ if (isset($_GET['mensaje'])) {
                 <td>
                 <span>
                   
-                     <a href="editar_medicamento.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>">
-                        <img src="imagenes/Editar.png" alt="Editar">
+                     <a href="AgregarOferta.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>">
+                        <img src="imagenes/Ofer.png" alt="Editar">
                     </a>
                 </span></td>
 
