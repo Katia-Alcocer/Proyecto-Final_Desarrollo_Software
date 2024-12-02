@@ -1,0 +1,96 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Fondo azul claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para alinear verticalmente */
+    justify-content: center; /* Centra el formulario verticalmente */
+    align-items: center; /* Centra el formulario horizontalmente */
+    height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+}
+
+/* Estilo para el título */
+h1 {
+    text-align: center;
+    background-color: #add8e6; /* Azul claro */
+    padding: 20px;
+    width: 100%;
+    margin: 0;
+    position: absolute; /* Asegura que se quede fijo en la parte superior */
+    top: 0;
+}
+
+/* Estilo para el formulario */
+form {
+    width: 80%; /* Hace que el formulario ocupe el 80% del ancho de la pantalla */
+    max-width: 900px; /* Limita el tamaño máximo del formulario */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 100px; /* Da espacio para que el título no se superponga */
+}
+
+/* Estilo de las etiquetas y campos de entrada */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="number"] {
+    width: auto;
+    max-width: 100px;
+}
+
+/* Estilo para columnas */
+#listaMedicamentos div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo del botón */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Color verde */
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para campos extra (visibles solo si corresponde) */
+#camposExtras {
+    grid-column: span 2;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Estilo del input readonly */
+input[readonly] {
+    background-color: #f0f0f0;
+}
+
+/* Estilo para el fondo azul claro */
+#camposExtras h3 {
+    margin-top: 0;
+}
