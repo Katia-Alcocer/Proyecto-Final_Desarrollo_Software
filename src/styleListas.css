@@ -77,18 +77,38 @@
         gap: 25px; /* Espacio entre los botones */
     }
     
-    .mensaje {
-        background-color: #d4edda; /* Fondo verde claro para éxito */
-        color: #155724; /* Texto verde oscuro */
+   /* .mensaje {
+        background-color: #d4edda; /* Fondo verde claro para éxito 
+        color: #155724; /* Texto verde oscuro 
         padding: 10px;
         margin-bottom: 20px;
         border: 1px solid #c3e6cb;
         border-radius: 5px;
         text-align: center;
-    }
+    }*/
     
    /* a img {
         float: left;
         margin-right: 40px;} /* Espacio entre botones */
     
-  
+        .mensaje-error {
+        
+            background-color: #d4edda; /* Fondo verde claro para éxito */
+            color: red; /* Texto verde oscuro */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .mensaje-exito {
+            background-color: #d4edda; /* Fondo verde claro para éxito */
+            color: #155724; /* Texto verde oscuro */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            text-align: center;
+        }
+        

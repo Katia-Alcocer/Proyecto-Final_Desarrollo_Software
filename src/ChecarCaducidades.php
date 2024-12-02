@@ -37,8 +37,12 @@ $medicamentos = obtenerMedicamentos($pdo);
 <?php
 // Verificar si hay un mensaje en la URL
 if (isset($_GET['mensaje'])) {
-    echo "<div class='mensaje'>" . htmlspecialchars($_GET['mensaje']) . "</div>";
+    $tipo = $_GET['tipo'] ?? 'info';
+    $color = $tipo === 'error' ? 'red' : 'green';
+    echo "<div style='color: $color;'>" . htmlspecialchars($_GET['mensaje']) . "</div>";
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +73,7 @@ if (isset($_GET['mensaje'])) {
             <th>Dias Restantes para Caducar</th>
             <th>Estatus Caducidad</th>
             <th>Poner en oferta</th>
+            <th>Agregar Comision por su Venta</th>
             <th>Eliminar</th>
         </tr>
     </thead>
@@ -86,12 +91,19 @@ if (isset($_GET['mensaje'])) {
                 <td><?php echo htmlspecialchars($medicamento['fechaCaducidad']); ?></td>
                 <td><?php echo htmlspecialchars($medicamento['DiasRestantes']); ?></td>
                 <td><?php echo htmlspecialchars($medicamento['EstadoCaducidad']); ?></td>
+                <span>
+
                 <td>
                 <span>
                   
                      <a href="AgregarOferta.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>">
                         <img src="imagenes/Ofer.png" alt="Editar">
                     </a>
+                </span></td>
+                <td>
+                  <a href="AgregarComicion.php?id=<?php echo htmlspecialchars($medicamento['idMedicamento']); ?>">
+                     <img src="imagenes/Comicion.png" alt="Editar">
+                 </a>
                 </span></td>
 
                 <td>
