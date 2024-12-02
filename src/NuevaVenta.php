@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $medicamentosVendidos = $_POST['medicamento'] ?? [];
     $cantidades = $_POST['cantidad'] ?? [];
 
+
     try {
         $pdo->beginTransaction();
 
@@ -58,6 +59,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     throw new Exception("Stock insuficiente para el medicamento con ID: $idMedicamento");
                 }
 
+                // Verificar en Ofertas
+    $stmtOferta = $pdo->prepare("SELECT COUNT(*) FROM Ofertas WHERE idMedicamento = ?");
+    $stmtOferta->execute([$idMedicamento]);
+    $tieneOferta = $stmtOferta->fetchColumn() > 0;
+
+    // Verificar en Comisiones
+    $stmtComision = $pdo->prepare("SELECT COUNT(*) FROM Comisiones WHERE idMedicamento = ?");
+    $stmtComision->execute([$idMedicamento]);
+    $tieneComision = $stmtComision->fetchColumn() > 0;
+
+    echo json_encode([
+        'tieneOferta' => $tieneOferta,
+        'tieneComision' => $tieneComision
+    ]);
+
                 $precioVenta = $medicamento['PrecioVenta'];
                 $descuento = $medicamento['Descuento'];
                 $precioFinal = $precioVenta * (1 - $descuento / 100) * $cantidad;
@@ -84,14 +100,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
 
                 // Manejo de comisiones
-                $stmtComision = $pdo->prepare("SELECT PorcentajeComision FROM Comisiones WHERE idMedicamento = ?");
+               /* $stmtComision = $pdo->prepare("SELECT porcentaje_comision FROM Comisiones WHERE idMedicamento = ?");
                 $stmtComision->execute([$idMedicamento]);
                 $porcentajeComision = $stmtComision->fetchColumn() ?? 0;
                 if ($porcentajeComision > 0) {
                     $montoComision = $precioVenta * $porcentajeComision / 100 * $cantidad;
                     $stmtActualizarComision = $pdo->prepare("UPDATE Empleados SET Comisiones = Comisiones + ? WHERE idEmpleado = ?");
                     $stmtActualizarComision->execute([$montoComision, $idEmpleado]);
-                }
+                }*/
             }
         }
 
@@ -158,6 +174,7 @@ function actualizarDatosMedicamento() {
                 camposExtras.style.display = "none";
             }
         }
+
     </script>
 </head>
 <body>

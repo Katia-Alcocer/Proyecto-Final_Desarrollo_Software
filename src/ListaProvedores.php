@@ -117,6 +117,7 @@ if (isset($_GET['mensaje'])) {
 </table>
 
 <button onclick="window.location.href='pagina_admin.html';">Regresar</button>
+<button onclick="window.location.href='AgregarProvedor.php';">Agregar Nuevo Proveedor</button>
 
 </body>
 </html>

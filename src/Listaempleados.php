@@ -162,6 +162,8 @@ if (isset($_GET['mensaje'])) {
 </table>
 
 <button onclick="window.location.href='ListaSucursales.php';">Regresar</button>
+<br>
+<button onclick="window.location.href='AgregarEmpleados.php';">Agregar Empleado</button>
 
 </body>
 </html>

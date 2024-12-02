@@ -110,6 +110,7 @@ $sucursales = $pdo->query("SELECT idSucursal, Nombre FROM Sucursales")->fetchAll
         <?php endforeach; ?>
 
         <button type="submit">Realizar Pedido</button>
+        <button type="button" onclick="window.location.href='pagina_admin.html';">Regresar</button>
     </form>
 </body>
 </html>

@@ -12,8 +12,8 @@
         <nav>
             <ul>
 
-                <li><button><a href="index.html">Salir</a></button></li>
-                <li><a href="index.html"><img src="imagenes/Salir.png"></a></li>
+                <li><button><a href="login.php">Salir</a></button></li>
+                <li><a href="login.php"><img src="imagenes/Salir.png"></a></li>
             </ul>
         </nav>
     </header>
@@ -23,18 +23,16 @@
         <section class="left">
             <div class="arriba">
         	  <div class="arriba1">
-                <a href="NuevaVenta.html">
-                    <button class="b1" type="submit"> 
+                    <button onclick="window.location.href='NuevaVenta.php';" class="b1" type="submit"> 
                     <p class="tito"> Nueva Venta </p>
                     <img class="log" src="imagenes/Venta.png">
                     </button>
-                </a>
         	  </div>
               <div class="arriba2">
-              	<button onclick="window.location.href='ListaMedicamento.php';" class="b2"type="submit"> 
-              		<p class="tito"> Inventario </p>
-              		<img class="log" src="imagenes/Inventario.png">
-              	</button>
+                <button onclick="window.location.href='ListaSucursales.php';" class="b6" type="submit"> 
+                    <p class="tit"> Todas las Sucursales </p>
+                    <img class="log" src="imagenes/Sucursal.png">
+                </button>
               </div>
         	</div>
         	<div class="abajo">
@@ -63,15 +61,15 @@
         	  	</button>
         	  </div>
               <div class="arriba2">
-              	<button onclick="window.location.href='ListaSucursales.php';" class="b6" type="submit"> 
-              		<p class="tit"> Todas las Sucursales </p>
-              		<img class="log" src="imagenes/Sucursal.png">
-              	</button>
+                <button onclick="window.location.href='ListaProvedores.php';" class="b2"type="submit"> 
+                    <p class="tito"> Proveedores </p>
+                    <img class="log" src="imagenes/Inventario.png">
+                </button>
               </div>
         	</div>
             <div class="abajo">
               <div class="abajo1">
-                <button class="b7" type="submit"> 
+                <button onclick="window.location.href='AgregarPedido.php';" class="b7" type="submit"> 
                     <p class="tit"> Registrar Pedidos </p>
                     <img class="log" src="imagenes/HacerPedido.png">
                 </button>

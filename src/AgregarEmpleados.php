@@ -35,7 +35,7 @@ $puestos = $pdo->query("SELECT idPuesto, Puesto, salario FROM Puesto")->fetchAll
 </head>
 <body>
     <h1>Registro de Empleados</h1>
-    <form id="employee-form" action="Listaempleados.php" method="post">
+    <form id="employee-form" action="ListaSucursales.php" method="post">
     <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
@@ -83,7 +83,7 @@ $puestos = $pdo->query("SELECT idPuesto, Puesto, salario FROM Puesto")->fetchAll
         </select>
     </div>
         <button type="submit">Agregar Empleado</button>
-        <button type="button" class="exit-button" onclick="window.location.href='pagina_admin.html';">Salir</button>
+        <button type="button" class="exit-button" onclick="window.location.href='ListaSucursales.php';">Salir</button>
     </form>
 </body>
 </html>

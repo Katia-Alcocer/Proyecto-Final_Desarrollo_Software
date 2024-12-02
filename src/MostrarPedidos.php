@@ -81,6 +81,20 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .pendiente {
             color: orange;
         }
+        .act {
+            background-color: #42a5f5;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centrar el botón */
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -109,6 +123,9 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </form>
             </div>
         <?php endforeach; ?>
+    </div>
+    <div class="button-container">
+    <button class="act"  onclick="window.location.href='pagina_admin.html';">Regresar</button>
     </div>
 </body>
 </html>
