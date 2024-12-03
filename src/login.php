@@ -39,7 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if ($user['idSucursal'] == 1) {
                     header("Location: pagina_admin.html"); // Página de administrador
                 } else {
+                    $_SESSION['idSucursal'] = $user['idSucursal'];
                     header("Location: pagina_sucursar.html"); // Página de sucursal
+                    exit();
                 }
                 exit();
             } else {
