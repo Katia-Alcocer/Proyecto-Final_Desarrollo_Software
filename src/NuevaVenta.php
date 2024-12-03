@@ -99,15 +99,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmtUpdateVenta->execute([$nombrePaciente, $nombreDoctor, $telefonoDoctor, $cedulaDoctor, $idVenta]);
                 }
 
-                // Manejo de comisiones
-               /* $stmtComision = $pdo->prepare("SELECT porcentaje_comision FROM Comisiones WHERE idMedicamento = ?");
-                $stmtComision->execute([$idMedicamento]);
-                $porcentajeComision = $stmtComision->fetchColumn() ?? 0;
-                if ($porcentajeComision > 0) {
-                    $montoComision = $precioVenta * $porcentajeComision / 100 * $cantidad;
-                    $stmtActualizarComision = $pdo->prepare("UPDATE Empleados SET Comisiones = Comisiones + ? WHERE idEmpleado = ?");
-                    $stmtActualizarComision->execute([$montoComision, $idEmpleado]);
-                }*/
             }
         }
 
@@ -143,16 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         });
     }
-    const tieneOferta = medicamentoSelect.options[medicamentoSelect.selectedIndex].dataset.oferta;
-    const tieneComision = medicamentoSelect.options[medicamentoSelect.selectedIndex].dataset.comision;
-    document.getElementById("tieneOferta").value = tieneOferta ? "Sí" : "No";
-    document.getElementById("tieneComision").value = tieneComision ? "Sí" : "No";
 
-    function actualizarTotal(precio) {
-    const totalInput = document.getElementById("totalPagar");
-    let totalActual = parseFloat(totalInput.value || 0);
-    totalInput.value = ('precioUnitario' * 'cantidad').toFixed(2);
-}
 function actualizarDatosMedicamento() {
         const selectMedicamento = document.getElementById('medicamento');
         const cantidadStock = document.getElementById('cantidadStock');
