@@ -21,11 +21,24 @@ if (!isset($_SESSION['idSucursal'])) {
 
 $idSucursalSesion = $_SESSION['idSucursal']; // ID de la sucursal guardada en la sesión
 
+// Manejo de la acción de cambiar estado
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idPedido'], $_POST['accion'])) {
+    $pedidoID = filter_input(INPUT_POST, 'idPedido', FILTER_VALIDATE_INT);
+    $accion = trim($_POST['accion']);
+
+    if ($pedidoID && in_array($accion, ['Recibido', 'Incompleto'])) {
+        // Actualizar el estado del pedido
+        $stmt = $pdo->prepare("UPDATE Pedidos SET Estado = ? WHERE idPedido = ?");
+        $stmt->execute([$accion, $pedidoID]);
+    }
+}
+
 // Obtener los pedidos con estado "Aprobado" y que correspondan a la sucursal de la sesión
-$stmt = $pdo->prepare("SELECT p.idPedido, dp.Cantidad, p.Estado, m.Nombre 
+$stmt = $pdo->prepare("SELECT p.idPedido, dp.Cantidad, p.Estado, m.Nombre AS Medicamento, s.Nombre AS Sucursal
         FROM Detalle_Pedidos dp 
         JOIN Medicamento m ON dp.idMedicamento = m.idMedicamento
         JOIN Pedidos p ON dp.idPedido = p.idPedido
+        JOIN Sucursales s ON m.idSucursal = s.idSucursal
         WHERE p.Estado = 'Aprobado' AND m.idSucursal = ?
         ORDER BY p.idPedido DESC");
 $stmt->execute([$idSucursalSesion]);
@@ -96,26 +109,24 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php if (count($pedidos) > 0): ?>
             <?php foreach ($pedidos as $pedido): ?>
                 <div class="pedido">
-                    <h3><?php echo htmlspecialchars($pedido['Nombre']); ?></h3>
+                    <h3><?php echo htmlspecialchars($pedido['Medicamento']); ?></h3>
                     <p><strong>Cantidad:</strong> <?php echo htmlspecialchars($pedido['Cantidad']); ?></p>
                     <p><strong>Estado:</strong> 
                         <span class="<?php echo strtolower($pedido['Estado']); ?>">
                             <?php echo htmlspecialchars($pedido['Estado']); ?>
                         </span>
                     </p>
+                    <p><strong>Sucursal:</strong> <?php echo htmlspecialchars($pedido['Sucursal']); ?></p>
                     <form method="POST">
                         <input type="hidden" name="idPedido" value="<?php echo htmlspecialchars($pedido['idPedido']); ?>">
                         <div class="buttons">
-                            <em>Acción completada</em>
+                            <?php if ($pedido['Estado'] === 'Aprobado'): ?>
+                                <button type="submit" name="accion" value="Recibido">Recibido</button>
+                                <button type="submit" name="accion" value="Incompleto">Incompleto</button>
+                            <?php else: ?>
+                                <em>Acción completada</em>
+                            <?php endif; ?>
                         </div>
-                        <div class="buttons">
-                        <?php if ($pedido['Estado'] === 'Pendiente'): ?>
-                            <button type="submit" name="accion" value="Recibido">Recibido</button>
-                            <button type="submit" name="accion" value="Incompleto">Incompleto</button>
-                        <?php else: ?>
-                            <em>Acción completada</em>
-                        <?php endif; ?>
-                    </div>
                     </form>
                 </div>
             <?php endforeach; ?>

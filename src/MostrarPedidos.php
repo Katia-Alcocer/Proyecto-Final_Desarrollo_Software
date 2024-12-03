@@ -10,6 +10,7 @@ try {
 } catch (PDOException $e) {
     die("Error en la conexión: " . $e->getMessage());
 }
+
 // Manejo de la acción de Aprobar/Rechazar
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'], $_POST['idPedido'])) {
     $pedidoID = filter_input(INPUT_POST, 'idPedido', FILTER_VALIDATE_INT);
@@ -28,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'], $_POST['idP
     }
 }
 
-
-// Obtener todos los pedidos
-$stmt = $pdo->query("SELECT p.idPedido, dp.Cantidad, p.Estado, m.Nombre 
-        FROM Detalle_Pedidos dp 
+// Obtener todos los pedidos y el nombre de la sucursal
+$stmt = $pdo->query("SELECT p.idPedido, dp.Cantidad, p.Estado, m.Nombre, s.Nombre AS NombreSucursal
+        FROM Detalle_Pedidos dp
         JOIN Medicamento m ON dp.idMedicamento = m.idMedicamento
         JOIN Pedidos p ON dp.idPedido = p.idPedido
-        WHERE Estado='Pendiente'
+        JOIN Sucursales s ON m.idSucursal = s.idSucursal
+        WHERE p.Estado='Pendiente'
         ORDER BY p.idPedido DESC");
 $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -109,8 +110,9 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <?php echo htmlspecialchars($pedido['Estado']); ?>
                     </span>
                 </p>
+                <p><strong>Sucursal:</strong> <?php echo htmlspecialchars($pedido['NombreSucursal']); ?></p>
                 <form method="POST">
-                <input type="hidden" name="idPedido" value="<?php echo htmlspecialchars($pedido['idPedido']); ?>">
+                    <input type="hidden" name="idPedido" value="<?php echo htmlspecialchars($pedido['idPedido']); ?>">
 
                     <div class="buttons">
                         <?php if ($pedido['Estado'] === 'Pendiente'): ?>
@@ -125,7 +127,8 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
     </div>
     <div class="button-container">
-    <button class="act"  onclick="window.location.href='pagina_admin.html';">Regresar</button>
+        <button class="act" onclick="window.location.href='pagina_admin.html';">Regresar</button>
     </div>
 </body>
 </html>
+
